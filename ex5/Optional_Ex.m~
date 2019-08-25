@@ -1,0 +1,20 @@
+function [  ] = Optional_Ex( X,y,Xval,yval,lambda )
+%OPTIONAL_EX optional exercise for plotting the learning curves with
+%randomly selected examples
+
+mtrain = size(X,1);
+mval =  size(Xval,1);
+m = min([mtrain mval]);
+err_val = zeros(m,1);
+err_train =zeros(m,1);
+repeat = 50
+for i = 1 : m
+    for j=1:repeat
+    rand_indx = randi(m,1,i);
+    Xrand = X(rand_inx,:);
+    yrand = y(rand_indx);
+    theta = trainLinearReg(Xrand,yrand,lambda);
+    htrain = Xrand*theta;
+    err_train(i)=sum((htrain-yrand).^2)/(2*mtrain);
+end
+
